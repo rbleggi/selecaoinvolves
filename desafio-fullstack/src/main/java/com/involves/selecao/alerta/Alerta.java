@@ -8,6 +8,16 @@ public class Alerta {
 	private Integer flTipo;
 	private Integer margem;
 	
+	public Alerta(){}
+
+	public Alerta(String pontoDeVenda,String descricao,String produto,Integer flTipo,Integer margem){
+		this.pontoDeVenda = pontoDeVenda;
+		this.descricao = descricao;
+		this.produto = produto;
+		this.flTipo = flTipo;
+		this.margem = margem;
+	}
+
 	public String getPontoDeVenda() {
 		return pontoDeVenda;
 	}
