@@ -1,5 +1,8 @@
 package com.involves.selecao.gateway;
 
+import java.sql.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,7 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.involves.selecao.alerta.Alerta;
+import com.involves.selecao.domain.Alerta;
 import com.involves.selecao.gateway.mongo.MongoDbFactory;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -27,6 +30,7 @@ public class AlertaMongoGateway implements AlertaGateway{
                 .append("descricao", alerta.getDescricao())
                 .append("tipo", alerta.getFlTipo())
                 .append("margem", alerta.getMargem())
+                .append("data_hora_cadastro", Date.from(alerta.getDataHoraCadastro().toInstant()))
                 .append("produto", alerta.getProduto());
 		collection.insertOne(doc);
 	}
@@ -42,6 +46,7 @@ public class AlertaMongoGateway implements AlertaGateway{
 			alerta.setDescricao(document.getString("descricao"));
 			alerta.setFlTipo(document.getInteger("tipo"));
 			alerta.setMargem(document.getInteger("margem"));
+			alerta.setDataHoraCadastro(ZonedDateTime.ofInstant(document.getDate("data_hora_cadastro").toInstant(), ZoneId.systemDefault()));
 			alerta.setPontoDeVenda(document.getString("ponto_de_venda"));
 			alerta.setProduto(document.getString("produto"));
 			alertas.add(alerta);

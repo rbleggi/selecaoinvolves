@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.involves.selecao.gateway.mongo.MongoDbFactory;
+import com.mongodb.BasicDBObject;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -27,7 +28,7 @@ public class ProcessadorAlertasTest {
 
 	@Before
 	public void setUp() {
-//		mongoFactory.getDb().getCollection("Alertas").
+//		mongoFactory.getDb().getCollection("Alertas").remove(new BasicDBObject());
 	}
 
 	@Test
