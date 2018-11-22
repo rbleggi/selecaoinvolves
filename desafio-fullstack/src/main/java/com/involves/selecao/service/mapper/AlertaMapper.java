@@ -6,15 +6,18 @@ import com.involves.selecao.service.dto.AlertaDTO;
 public class AlertaMapper {
 	
 	public static Alerta convertToAlerta(AlertaDTO alertaDTO) {
-		Alerta alerta = new Alerta();
-		alerta.setId(alertaDTO.getId());
-		alerta.setDescricao(alertaDTO.getDescricao());
-		alerta.setDataHoraCadastro(alertaDTO.getData_hora_cadastro());
-		alerta.setFlTipo(alertaDTO.getFl_tipo());
-		alerta.setMargem(alertaDTO.getMargem());
-		alerta.setPontoDeVenda(alertaDTO.getPonto_de_venda());
-		alerta.setProduto(alertaDTO.getProduto());
-		return alerta;
+		if (alertaDTO != null) {
+			Alerta alerta = new Alerta();
+			alerta.setId(alertaDTO.getId());
+			alerta.setDescricao(alertaDTO.getDescricao());
+			alerta.setDataHoraCadastro(alertaDTO.getData_hora_cadastro());
+			alerta.setFlTipo(alertaDTO.getFl_tipo());
+			alerta.setMargem(alertaDTO.getMargem());
+			alerta.setPontoDeVenda(alertaDTO.getPonto_de_venda());
+			alerta.setProduto(alertaDTO.getProduto());
+			return alerta;
+		}
+		return null;
 	}
 
 	public static AlertaDTO convertToAlertaDTO(Alerta alerta) {

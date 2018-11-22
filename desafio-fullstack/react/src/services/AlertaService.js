@@ -9,10 +9,10 @@ class AlertaService {
 
     findAll = (fieldName, fieldValue) => {
         let _url;
-        if (fieldName !== 'todos')
-            _url = `${this._urlBase}/?${fieldName}=${fieldValue}`;
-        else
+        if (fieldName === 'todos')
             _url = `${this._urlBase}/`;
+        else
+            _url = `${this._urlBase}/?${fieldName}=${fieldValue}`;
         return this._axiosInstance.get(_url).then(response => {
             return response.data
         }).catch(error => {

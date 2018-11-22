@@ -6,6 +6,6 @@ import com.involves.selecao.service.dto.AlertaDTO;
 
 public interface BuscaAlertasService {
 	
-	public List<AlertaDTO> buscarTodos() ;
+	public List<AlertaDTO> buscarTodos(AlertaDTO alertaDTO) ;
 
 }

@@ -17,8 +17,8 @@ public class BuscaAlertasServiceImpl implements BuscaAlertasService {
 	@Autowired
 	private AlertaGateway gateway;
 	
-	public List<AlertaDTO> buscarTodos() {
-		return gateway.buscarTodos().stream().map(alerta -> AlertaMapper.convertToAlertaDTO(alerta)).collect(Collectors.toList());
+	public List<AlertaDTO> buscarTodos(AlertaDTO alertaDTO) {
+		return gateway.buscarTodos(AlertaMapper.convertToAlerta(alertaDTO)).stream().map(alerta -> AlertaMapper.convertToAlertaDTO(alerta)).collect(Collectors.toList());
 	}
 
 }

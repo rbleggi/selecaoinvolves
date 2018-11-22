@@ -15,6 +15,7 @@ import com.involves.selecao.gateway.mongo.MongoDbFactory;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 @Component
 public class AlertaMongoGateway implements AlertaGateway{
@@ -36,20 +37,32 @@ public class AlertaMongoGateway implements AlertaGateway{
 	}
 
 	@Override
-	public List<Alerta> buscarTodos() {
+	public List<Alerta> buscarTodos(Alerta alerta) {
+		FindIterable<Document> db = null;
 		MongoDatabase database = mongoFactory.getDb();
 		MongoCollection<Document> collection = database.getCollection("Alertas");
-		FindIterable<Document> db = collection.find();
+		if (alerta == null) {
+			db = collection.find();
+		} else {
+			if (alerta.getFlTipo() != null) {
+				db = collection.find(Filters.eq("tipo", alerta.getFlTipo()));
+			} else if (alerta.getPontoDeVenda() != null) {
+				db = collection.find(Filters.eq("ponto_de_venda", alerta.getPontoDeVenda()));
+			}
+		}
+
 		List<Alerta> alertas = new ArrayList<>();
-		for (Document document : db) {
-			Alerta alerta = new Alerta();
-			alerta.setDescricao(document.getString("descricao"));
-			alerta.setFlTipo(document.getInteger("tipo"));
-			alerta.setMargem(document.getInteger("margem"));
-			alerta.setDataHoraCadastro(ZonedDateTime.ofInstant(document.getDate("data_hora_cadastro").toInstant(), ZoneId.systemDefault()));
-			alerta.setPontoDeVenda(document.getString("ponto_de_venda"));
-			alerta.setProduto(document.getString("produto"));
-			alertas.add(alerta);
+		if (db != null) {
+			for (Document document : db) {
+				Alerta alertaRetorno = new Alerta();
+				alertaRetorno.setDescricao(document.getString("descricao"));
+				alertaRetorno.setFlTipo(document.getInteger("tipo"));
+				alertaRetorno.setMargem(document.getInteger("margem"));
+				alertaRetorno.setDataHoraCadastro(ZonedDateTime.ofInstant(document.getDate("data_hora_cadastro").toInstant(), ZoneId.systemDefault()));
+				alertaRetorno.setPontoDeVenda(document.getString("ponto_de_venda"));
+				alertaRetorno.setProduto(document.getString("produto"));
+				alertas.add(alertaRetorno);
+			}
 		}
 		return alertas;
 	}

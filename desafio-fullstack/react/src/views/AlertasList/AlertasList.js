@@ -28,7 +28,7 @@ class AlertasList extends Component {
     render() {
         const options = [
             { key: 'ponto_de_venda', text: 'Ponto de venda', value: 'ponto_de_venda' },
-            { key: 'tipo', text: 'Tipo', value: 'tipo' },
+            { key: 'fl_tipo', text: 'Tipo', value: 'fl_tipo' },
           ]
         return (
             <div>
