@@ -17,7 +17,7 @@ gradlew bootRun
 2. Abra o navegador em `http://localhost:8080/alertas/processar` para que o dados das lojas sejam processados. 
 
 3. Rode o front-end react
-
+``` 
 gradlew npmStart
-
+```
 4. Abra o navegador em `http://localhost:3000/` para que os dados das lojas sejam visualizados.
