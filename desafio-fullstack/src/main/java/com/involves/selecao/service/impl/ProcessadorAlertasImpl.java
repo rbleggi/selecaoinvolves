@@ -14,9 +14,10 @@ import com.involves.selecao.domain.Alerta;
 import com.involves.selecao.domain.Pesquisa;
 import com.involves.selecao.domain.Resposta;
 import com.involves.selecao.gateway.AlertaGateway;
+import com.involves.selecao.service.ProcessadorAlertas;
 
 @Service
-public class ProcessadorAlertas {
+public class ProcessadorAlertasImpl implements ProcessadorAlertas{
 
 	private static final String URL_PESQUISAS = "http://selecao-involves.agilepromoter.com/pesquisas";
 	private static final String MSG_RUPTURA_DETECTADA = "Ruptura detectada!";

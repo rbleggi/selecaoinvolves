@@ -4,26 +4,27 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.involves.selecao.domain.Alerta;
-import com.involves.selecao.service.impl.BuscaAlertasService;
-import com.involves.selecao.service.impl.ProcessadorAlertas;
+import com.involves.selecao.service.dto.AlertaDTO;
+import com.involves.selecao.service.impl.BuscaAlertasServiceImpl;
+import com.involves.selecao.service.impl.ProcessadorAlertasImpl;
 
 @RestController
 @RequestMapping("/alertas")
 public class AlertaController {
 
 	@Autowired
-	private BuscaAlertasService buscaAlertasService;
+	private BuscaAlertasServiceImpl buscaAlertasService;
 	
 	@Autowired
-	private ProcessadorAlertas processador;
+	private ProcessadorAlertasImpl processador;
 	
 	@GetMapping
-    public List<Alerta> alertas() {
+    public List<AlertaDTO> alertas() {
 		return buscaAlertasService.buscarTodos();
     }
 	

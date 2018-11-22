@@ -10,7 +10,7 @@ public class AlertaMapper {
 		alerta.setId(alertaDTO.getId());
 		alerta.setDescricao(alertaDTO.getDescricao());
 		alerta.setDataHoraCadastro(alertaDTO.getData_hora_cadastro());
-		alerta.setFlTipo(alertaDTO.getFlTipo());
+		alerta.setFlTipo(alertaDTO.getFl_tipo());
 		alerta.setMargem(alertaDTO.getMargem());
 		alerta.setPontoDeVenda(alertaDTO.getPonto_de_venda());
 		alerta.setProduto(alertaDTO.getProduto());
@@ -22,7 +22,7 @@ public class AlertaMapper {
 		alertaDTO.setId(alerta.getId());
 		alertaDTO.setDescricao(alerta.getDescricao());
 		alertaDTO.setData_hora_cadastro(alerta.getDataHoraCadastro());
-		alertaDTO.setFlTipo(alerta.getFlTipo());
+		alertaDTO.setFl_tipo(alerta.getFlTipo());
 		alertaDTO.setMargem(alerta.getMargem());
 		alertaDTO.setPonto_de_venda(alerta.getPontoDeVenda());
 		alertaDTO.setProduto(alerta.getProduto());

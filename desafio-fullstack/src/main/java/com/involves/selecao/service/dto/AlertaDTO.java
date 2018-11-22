@@ -11,7 +11,7 @@ public class AlertaDTO {
 	private String ponto_de_venda;
 	private String descricao;
 	private String produto;
-	private Integer flTipo;
+	private Integer fl_tipo;
 	private Integer margem;
 	private ZonedDateTime data_hora_cadastro;
 
@@ -47,12 +47,12 @@ public class AlertaDTO {
 		this.produto = produto;
 	}
 
-	public Integer getFlTipo() {
-		return flTipo;
+	public Integer getFl_tipo() {
+		return fl_tipo;
 	}
 
-	public void setFlTipo(Integer flTipo) {
-		this.flTipo = flTipo;
+	public void setFl_tipo(Integer fl_tipo) {
+		this.fl_tipo = fl_tipo;
 	}
 
 	public Integer getMargem() {

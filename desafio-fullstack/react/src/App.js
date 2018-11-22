@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 import HeaderExemplo from './views/HeaderExemplo';
-import UserListController from './views/UserList/UserListController';
-import FormUsersController from './views/FormUser/FormUsersController';
+import AlertaListController from './views/AlertasList/AlertaListController';
 import { Route,NavLink,BrowserRouter } from "react-router-dom";
 import './App.css';
 

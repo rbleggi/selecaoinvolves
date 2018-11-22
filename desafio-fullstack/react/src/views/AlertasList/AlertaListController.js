@@ -13,12 +13,9 @@ class AlertaListController extends Component {
     componentDidMount() {
         return this.alertaStore.findAll("todos", null);
     }
+
     findAll = (fieldName, fieldValue) => {
         return this.alertaStore.findAll(fieldName, fieldValue);
-    }
-
-    deleteAlertaById = (id) => {
-        return this.alertaStore.deleteAlertaById(id);
     }
 
     render() {
