@@ -39,7 +39,7 @@ public class AlertaMongoGateway implements AlertaGateway {
 	}
 
 	@Override
-	public List<Alerta> buscarTodos(Alerta alerta) {
+	public List<Alerta> buscar(Alerta alerta) {
 		FindIterable<Document> db = null;
 		MongoDatabase database = mongoFactory.getDb();
 		MongoCollection<Document> collection = database.getCollection("Alertas");
@@ -68,5 +68,12 @@ public class AlertaMongoGateway implements AlertaGateway {
 			}
 		}
 		return alertas;
+	}
+	
+	@Override
+	public void remover(Alerta alerta) {
+		MongoDatabase database = mongoFactory.getDb();
+		MongoCollection<Document> collection = database.getCollection("Alertas");
+		collection.deleteMany(new Document());
 	}
 }

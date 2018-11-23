@@ -4,24 +4,31 @@ import AlertaStore from "../../stores/AlertaStore";
 import AlertasList from "./AlertasList";
 import { Container } from "semantic-ui-react";
 import AlertaCard from "./AlertaCard";
+import { Button } from "semantic-ui-react";
 
 @observer
 class AlertaListController extends Component {
   alertaStore = new AlertaStore();
 
   componentDidMount() {
-    return this.alertaStore.findAll();
+    return this.alertaStore.buscar();
   }
 
-  findAll = (fieldName, fieldValue) => {
-    return this.alertaStore.findAll(fieldName, fieldValue);
-  };
+  buscar = (fieldName, fieldValue) =>
+    this.alertaStore.buscar(fieldName, fieldValue);
+
+  processar = () =>
+    this.alertaStore.processar().then(this.alertaStore.buscar());
+
+  remover = () => this.alertaStore.remover().then(this.alertaStore.buscar());
 
   render() {
     return (
       <div className="AlertaListController">
         <div className="container">
-          <AlertasList findAll={this.findAll} />
+          <Button onClick={this.processar}>Processar Dados</Button>
+          <Button onClick={this.remover}>Remover Alertas</Button>
+          <AlertasList buscar={this.buscar} />
         </div>
         <div>
           {

@@ -19,7 +19,7 @@ import com.mongodb.client.MongoCollection;
 public class BuscaAlertasIntegrationTest extends AbstractIntegrationTest {
 
 	@Autowired
-	private BuscaAlertasService service;
+	private AlertasService service;
 
 	@Test
 	public void deveBuscaraTodosAlertas() {
@@ -41,7 +41,7 @@ public class BuscaAlertasIntegrationTest extends AbstractIntegrationTest {
 		collection.insertOne(doc2);
 
 		
-		List<AlertaDTO> buscarTodos = service.buscarTodos(new AlertaDTO());
+		List<AlertaDTO> buscarTodos = service.buscar(new AlertaDTO());
 
 		Assert.assertTrue(buscarTodos.size() == 2);
 		Assert.assertTrue(buscarTodos.stream().anyMatch(alerta -> alerta.getFl_tipo() == 2));
@@ -77,7 +77,7 @@ public class BuscaAlertasIntegrationTest extends AbstractIntegrationTest {
 		
 		AlertaDTO alertaDTO = new AlertaDTO();
 		alertaDTO.setFl_tipo(2);
-		List<AlertaDTO> buscarTodos = service.buscarTodos(alertaDTO);
+		List<AlertaDTO> buscarTodos = service.buscar(alertaDTO);
 		
 		Assert.assertTrue(buscarTodos.size() == 2);
 		Assert.assertTrue(buscarTodos.stream().anyMatch(alerta -> alerta.getFl_tipo() == 2));
@@ -113,7 +113,7 @@ public class BuscaAlertasIntegrationTest extends AbstractIntegrationTest {
 		
 		AlertaDTO alertaDTO = new AlertaDTO();
 		alertaDTO.setPonto_de_venda("one");
-		List<AlertaDTO> buscarTodos = service.buscarTodos(alertaDTO);
+		List<AlertaDTO> buscarTodos = service.buscar(alertaDTO);
 		
 		Assert.assertTrue(buscarTodos.size() == 2);
 		Assert.assertTrue(buscarTodos.stream().anyMatch(alerta -> alerta.getFl_tipo() == 2));

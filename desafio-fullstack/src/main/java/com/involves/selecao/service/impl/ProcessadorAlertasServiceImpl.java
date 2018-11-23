@@ -62,8 +62,7 @@ public class ProcessadorAlertasServiceImpl implements ProcessadorAlertasService 
 		gateway.salvar(new Alerta(pontoVenda, MSG_RUPTURA_DETECTADA, produto, null, 1, null));
 	}
 
-	private void criarAlertaPerguntaPrecoProduto(int precoColetado, int precoEstipulado, String pontoVenda,
-			String produto) {
+	private void criarAlertaPerguntaPrecoProduto(int precoColetado, int precoEstipulado, String pontoVenda, String produto) {
 		int margem = precoEstipulado - precoColetado;
 		if (precoColetado > precoEstipulado)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PRECO_ACIMA_DO_ESTIPULADO, produto, null, 2, margem));
@@ -71,14 +70,12 @@ public class ProcessadorAlertasServiceImpl implements ProcessadorAlertasService 
 			gateway.salvar(new Alerta(pontoVenda, MSG_PRECO_ABAIXO_DO_ESTIPULADO, produto, null, 3, margem));
 	}
 
-	private void criarAlertaPerguntaShare(int participacaoColetado, int participacaoEstipulada, String pontoVenda,
-			String categoria) {
+	private void criarAlertaPerguntaShare(int participacaoColetado, int participacaoEstipulada, String pontoVenda, String categoria) {
 		int margem = participacaoEstipulada - participacaoColetado;
 		if (participacaoColetado < participacaoEstipulada)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PARTICIPACAO_INFERIOR_ESTIPULADO, null, categoria, 4, margem));
 		else if (participacaoColetado > participacaoEstipulada)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PARTICIPACAO_SUPERIOR_ESTIPULADO, null, categoria, 5, margem));
-
 	}
 
 }
