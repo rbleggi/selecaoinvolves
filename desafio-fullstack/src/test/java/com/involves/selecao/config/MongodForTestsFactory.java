@@ -1,4 +1,5 @@
-package com.involves.selecao.service;
+package com.involves.selecao.config;
+
 
 import java.io.IOException;
 import java.net.UnknownHostException;

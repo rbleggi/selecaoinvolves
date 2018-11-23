@@ -27,10 +27,10 @@ public class ProcessadorAlertasServiceImpl implements ProcessadorAlertasService 
 
 	@Autowired
 	private AlertaGateway gateway;
-	
+
 	@Autowired
 	private BuscaDePesquisasService buscaDePesquisasService;
-	
+
 	public void processa() {
 		List<Pesquisa> pesquisasFromJSON = buscaDePesquisasService.getPesquisasFromJSON();
 		pesquisasFromJSON.stream().forEach(pesquisa -> pesquisa.getRespostas().stream().forEach(resposta -> {
@@ -38,8 +38,8 @@ public class ProcessadorAlertasServiceImpl implements ProcessadorAlertasService 
 			String pontoVenda = pesquisa.getPonto_de_venda();
 			switch (resposta.getPergunta()) {
 			case MSG_QUAL_A_SITUACAO_DO_PRODUTO:
-				if (resposta.getResposta().equals(MSG_PRODUTO_AUSENTE_NA_GONDOLA)) 
-				criarAlertaPerguntaSituacaoProduto(resposta, pontoVenda, produto);
+				if (resposta.getResposta().equals(MSG_PRODUTO_AUSENTE_NA_GONDOLA))
+					criarAlertaPerguntaSituacaoProduto(resposta, pontoVenda, produto);
 				break;
 			case MSG_QUAL_O_PRECO_DO_PRODUTO:
 				int precoResposta = Integer.parseInt(resposta.getResposta());
@@ -62,21 +62,23 @@ public class ProcessadorAlertasServiceImpl implements ProcessadorAlertasService 
 		gateway.salvar(new Alerta(pontoVenda, MSG_RUPTURA_DETECTADA, produto, null, 1, null));
 	}
 
-	private void criarAlertaPerguntaPrecoProduto(int precoColetado, int precoEstipulado, String pontoVenda, String produto) {
+	private void criarAlertaPerguntaPrecoProduto(int precoColetado, int precoEstipulado, String pontoVenda,
+			String produto) {
 		int margem = precoEstipulado - precoColetado;
-		if (precoColetado > precoEstipulado) 
+		if (precoColetado > precoEstipulado)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PRECO_ACIMA_DO_ESTIPULADO, produto, null, 2, margem));
-		else if (precoColetado < precoEstipulado) 
+		else if (precoColetado < precoEstipulado)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PRECO_ABAIXO_DO_ESTIPULADO, produto, null, 3, margem));
 	}
 
-	private void criarAlertaPerguntaShare(int participacaoColetado, int participacaoEstipulada, String pontoVenda, String categoria) {
+	private void criarAlertaPerguntaShare(int participacaoColetado, int participacaoEstipulada, String pontoVenda,
+			String categoria) {
 		int margem = participacaoEstipulada - participacaoColetado;
-		if (participacaoColetado < participacaoEstipulada) 
+		if (participacaoColetado < participacaoEstipulada)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PARTICIPACAO_INFERIOR_ESTIPULADO, null, categoria, 4, margem));
-		else if (participacaoColetado > participacaoEstipulada) 
+		else if (participacaoColetado > participacaoEstipulada)
 			gateway.salvar(new Alerta(pontoVenda, MSG_PARTICIPACAO_SUPERIOR_ESTIPULADO, null, categoria, 5, margem));
-		
+
 	}
 
 }

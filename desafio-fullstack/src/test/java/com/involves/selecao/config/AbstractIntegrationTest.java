@@ -1,31 +1,34 @@
-package com.involves.selecao.service;
+package com.involves.selecao.config;
+
 
 import org.junit.After;
 import org.junit.Before;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.involves.selecao.gateway.mongo.MongoDbFactory;
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
 import de.flapdoodle.embed.mongo.distribution.Version;
 
-@ActiveProfiles("MongoTest-test")
-public class AbstractIntegrationTest {
+public abstract class AbstractIntegrationTest {
 	
-	@Autowired
+	@MockBean
 	private MongoDbFactory mongoDbFactory;
 	private MongodForTestsFactory factory;
 	
-	MongoDatabase database;
+	private MongoDatabase database;
 
+	public MongoDatabase getDatabase() {
+		return database;
+	}
+	
 	@Before
 	public void setup() throws Exception {
+		MockitoAnnotations.initMocks(this);
 		factory = MongodForTestsFactory.with(Version.Main.PRODUCTION);
-		MongoClient mongo = factory.newMongo();
-		database = mongo.getDatabase("teste");
+		database = factory.newMongo().getDatabase("teste");
 		Mockito.when(mongoDbFactory.getDb()).thenReturn(database);
 	}
 
