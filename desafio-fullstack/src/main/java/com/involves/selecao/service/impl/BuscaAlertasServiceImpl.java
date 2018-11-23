@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.involves.selecao.converters.AlertaConverter;
 import com.involves.selecao.gateway.AlertaGateway;
 import com.involves.selecao.service.BuscaAlertasService;
 import com.involves.selecao.service.dto.AlertaDTO;
-import com.involves.selecao.service.mapper.AlertaMapper;
 
 @Service
 public class BuscaAlertasServiceImpl implements BuscaAlertasService {
@@ -18,7 +18,7 @@ public class BuscaAlertasServiceImpl implements BuscaAlertasService {
 	private AlertaGateway gateway;
 	
 	public List<AlertaDTO> buscarTodos(AlertaDTO alertaDTO) {
-		return gateway.buscarTodos(AlertaMapper.convertToAlerta(alertaDTO)).stream().map(alerta -> AlertaMapper.convertToAlertaDTO(alerta)).collect(Collectors.toList());
+		return gateway.buscarTodos(AlertaConverter.convertToAlerta(alertaDTO)).stream().map(alerta -> AlertaConverter.convertToAlertaDTO(alerta)).collect(Collectors.toList());
 	}
 
 }

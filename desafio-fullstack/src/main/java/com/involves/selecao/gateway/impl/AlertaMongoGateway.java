@@ -1,4 +1,4 @@
-package com.involves.selecao.gateway;
+package com.involves.selecao.gateway.impl;
 
 import java.sql.Timestamp;
 import java.time.ZoneId;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.involves.selecao.domain.Alerta;
+import com.involves.selecao.gateway.AlertaGateway;
 import com.involves.selecao.gateway.mongo.MongoDbFactory;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -19,7 +20,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 @Component
-public class AlertaMongoGateway implements AlertaGateway{
+public class AlertaMongoGateway implements AlertaGateway {
 	
 	@Autowired
 	private MongoDbFactory mongoFactory;

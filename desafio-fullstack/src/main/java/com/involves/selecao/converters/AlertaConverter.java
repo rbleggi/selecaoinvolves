@@ -1,9 +1,9 @@
-package com.involves.selecao.service.mapper;
+package com.involves.selecao.converters;
 
 import com.involves.selecao.domain.Alerta;
 import com.involves.selecao.service.dto.AlertaDTO;
 
-public class AlertaMapper {
+public class AlertaConverter {
 	
 	public static Alerta convertToAlerta(AlertaDTO alertaDTO) {
 		if (alertaDTO != null) {

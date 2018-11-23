@@ -1,41 +1,26 @@
 package com.involves.selecao.service;
 
-import java.io.IOException;
-
-import org.junit.Before;
+import org.bson.Document;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.involves.selecao.gateway.mongo.MongoDbFactory;
-import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-public class ProcessadorAlertasTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ProcessadorAlertasTest extends AbstractIntegrationTest {
 
 	@Autowired
-	private ProcessadorAlertasService processador;
-
-	@Autowired
-	private MongoDbFactory mongoFactory;
+	private ProcessadorAlertasService service;
 	
-
-	@Before
-	public void setUp() {
-//		mongoFactory.getDb().getCollection("Alertas").remove(new BasicDBObject());
-	}
-
 	@Test
-	public void deveAdicionarVeiculo() throws IOException {
-		
-		processador.processa();
-		
+	public void teste() {
+		service.processa();
+		FindIterable<Document> find = database.getCollection("Alertas").find();
+		Assert.assertTrue(find.first().getString("descricao").equals("Participação inferior ao estipulado"));
 	}
-	
 }
