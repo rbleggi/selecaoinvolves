@@ -1,10 +1,11 @@
 package com.involves.selecao.gateway;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class AlertaMongoGateway implements AlertaGateway{
                 .append("descricao", alerta.getDescricao())
                 .append("tipo", alerta.getFlTipo())
                 .append("margem", alerta.getMargem())
-                .append("data_hora_cadastro", Date.from(alerta.getDataHoraCadastro().toInstant()))
-                .append("produto", alerta.getProduto());
+                .append("produto", alerta.getProduto())
+				.append("categoria", alerta.getCategoria());
 		collection.insertOne(doc);
 	}
 
@@ -41,14 +42,13 @@ public class AlertaMongoGateway implements AlertaGateway{
 		FindIterable<Document> db = null;
 		MongoDatabase database = mongoFactory.getDb();
 		MongoCollection<Document> collection = database.getCollection("Alertas");
-		if (alerta == null) {
-			db = collection.find();
+		
+		if (alerta.getFlTipo() != null) {
+			db = collection.find(Filters.eq("tipo", alerta.getFlTipo()));
+		} else if (alerta.getPontoDeVenda() != null) {
+			db = collection.find(Filters.regex("ponto_de_venda", Pattern.compile("(?i).*" + alerta.getPontoDeVenda() + ".*")));
 		} else {
-			if (alerta.getFlTipo() != null) {
-				db = collection.find(Filters.eq("tipo", alerta.getFlTipo()));
-			} else if (alerta.getPontoDeVenda() != null) {
-				db = collection.find(Filters.eq("ponto_de_venda", alerta.getPontoDeVenda()));
-			}
+			db = collection.find();
 		}
 
 		List<Alerta> alertas = new ArrayList<>();
@@ -58,9 +58,11 @@ public class AlertaMongoGateway implements AlertaGateway{
 				alertaRetorno.setDescricao(document.getString("descricao"));
 				alertaRetorno.setFlTipo(document.getInteger("tipo"));
 				alertaRetorno.setMargem(document.getInteger("margem"));
-				alertaRetorno.setDataHoraCadastro(ZonedDateTime.ofInstant(document.getDate("data_hora_cadastro").toInstant(), ZoneId.systemDefault()));
+				alertaRetorno.setDataHoraCadastro(ZonedDateTime.ofInstant(new Timestamp(document.getObjectId("_id").getDate().getTime()).toInstant(), ZoneId.systemDefault()));
 				alertaRetorno.setPontoDeVenda(document.getString("ponto_de_venda"));
 				alertaRetorno.setProduto(document.getString("produto"));
+				alertaRetorno.setCategoria(document.getString("categoria"));
+				alertaRetorno.setId(document.getObjectId("_id").toHexString());
 				alertas.add(alertaRetorno);
 			}
 		}

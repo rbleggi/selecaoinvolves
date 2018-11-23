@@ -20,7 +20,7 @@ import com.mongodb.BasicDBObject;
 public class ProcessadorAlertasTest {
 
 	@Autowired
-	private ProcessadorAlertas processador;
+	private ProcessadorAlertasService processador;
 
 	@Autowired
 	private MongoDbFactory mongoFactory;

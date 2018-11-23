@@ -11,8 +11,11 @@ public class AlertaDTO {
 	private String ponto_de_venda;
 	private String descricao;
 	private String produto;
+	private String categoria;
 	private Integer fl_tipo;
 	private Integer margem;
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private ZonedDateTime data_hora_cadastro;
 
 	public String getId() {
@@ -45,6 +48,14 @@ public class AlertaDTO {
 
 	public void setProduto(String produto) {
 		this.produto = produto;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	public Integer getFl_tipo() {

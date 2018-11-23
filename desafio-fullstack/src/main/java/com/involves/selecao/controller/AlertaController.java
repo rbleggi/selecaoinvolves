@@ -1,6 +1,5 @@
 package com.involves.selecao.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.involves.selecao.service.dto.AlertaDTO;
 import com.involves.selecao.service.impl.BuscaAlertasServiceImpl;
-import com.involves.selecao.service.impl.ProcessadorAlertasImpl;
+import com.involves.selecao.service.impl.ProcessadorAlertasServiceImpl;
 
 @RestController
 @RequestMapping("/alertas")
@@ -20,7 +19,7 @@ public class AlertaController {
 	private BuscaAlertasServiceImpl buscaAlertasService;
 	
 	@Autowired
-	private ProcessadorAlertasImpl processador;
+	private ProcessadorAlertasServiceImpl processador;
 	
 	@GetMapping
     public List<AlertaDTO> alertas(AlertaDTO alertaDTO) {
@@ -29,10 +28,6 @@ public class AlertaController {
 	
 	@GetMapping("/processar")
     public void processar() {
-		try {
-			processador.processa();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		processador.processa();
     }
 }

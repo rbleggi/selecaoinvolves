@@ -8,17 +8,19 @@ public class Alerta {
 	private String pontoDeVenda;
 	private String descricao;
 	private String produto;
+	private String categoria;
 	private Integer flTipo;
 	private Integer margem;
-	private ZonedDateTime dataHoraCadastro = ZonedDateTime.now();
+	private ZonedDateTime dataHoraCadastro;
 
 	public Alerta() {
 	}
 
-	public Alerta(String pontoDeVenda, String descricao, String produto, Integer flTipo, Integer margem) {
+	public Alerta(String pontoDeVenda, String descricao, String produto, String categoria, Integer flTipo, Integer margem) {
 		this.pontoDeVenda = pontoDeVenda;
 		this.descricao = descricao;
 		this.produto = produto;
+		this.categoria = categoria;
 		this.flTipo = flTipo;
 		this.margem = margem;
 	}
@@ -55,6 +57,14 @@ public class Alerta {
 		this.produto = produto;
 	}
 
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
 	public Integer getFlTipo() {
 		return flTipo;
 	}
@@ -78,5 +88,5 @@ public class Alerta {
 	public void setDataHoraCadastro(ZonedDateTime dataHoraCadastro) {
 		this.dataHoraCadastro = dataHoraCadastro;
 	}
-	
+
 }

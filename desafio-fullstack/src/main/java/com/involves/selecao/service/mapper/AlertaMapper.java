@@ -15,6 +15,7 @@ public class AlertaMapper {
 			alerta.setMargem(alertaDTO.getMargem());
 			alerta.setPontoDeVenda(alertaDTO.getPonto_de_venda());
 			alerta.setProduto(alertaDTO.getProduto());
+			alerta.setCategoria(alertaDTO.getCategoria());
 			return alerta;
 		}
 		return null;
@@ -29,6 +30,7 @@ public class AlertaMapper {
 		alertaDTO.setMargem(alerta.getMargem());
 		alertaDTO.setPonto_de_venda(alerta.getPontoDeVenda());
 		alertaDTO.setProduto(alerta.getProduto());
+		alertaDTO.setCategoria(alerta.getCategoria());
 		return alertaDTO;
 	}
 
