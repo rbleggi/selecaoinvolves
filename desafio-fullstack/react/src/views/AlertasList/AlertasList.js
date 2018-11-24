@@ -70,11 +70,7 @@ class AlertasList extends Component {
             <input hidden={this.fieldName === "todos"} />
           )}
           {this.fieldName === "fl_tipo" && (
-            <Select
-              hidden={this.fieldName !== "fl_tipo"}
-              compact
-              options={optionsTipo}
-              name="fieldTipo"
+            <Select              hidden={this.fieldName !== "fl_tipo"}              compact              options={optionsTipo}              name="fieldTipo"
               defaultValue="1"
               onChange={this._setFieldValueTipo}
             />

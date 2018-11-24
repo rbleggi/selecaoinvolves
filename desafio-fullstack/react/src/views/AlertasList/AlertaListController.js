@@ -18,9 +18,10 @@ class AlertaListController extends Component {
     this.alertaStore.buscar(fieldName, fieldValue);
 
   processar = () =>
-    this.alertaStore.processar().then(this.alertaStore.buscar());
+    this.alertaStore.processar().then(() => this.alertaStore.buscar());
 
-  remover = () => this.alertaStore.remover().then(this.alertaStore.buscar());
+  remover = () =>
+    this.alertaStore.remover().then(() => this.alertaStore.buscar());
 
   render() {
     return (
